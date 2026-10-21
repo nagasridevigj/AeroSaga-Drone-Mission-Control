@@ -12,25 +12,30 @@ public class MissionClient {
         WorkflowServiceStubs service =
                 WorkflowServiceStubs.newLocalServiceStubs();
 
-        WorkflowClient client =
-                WorkflowClient.newInstance(service);
+        try {
+            WorkflowClient client =
+                    WorkflowClient.newInstance(service);
 
-        WorkflowOptions options =
-                WorkflowOptions.newBuilder()
-                        .setTaskQueue(MissionWorker.TASK_QUEUE)
-                        .setWorkflowId("MISSION-M001")
-                        .build();
+            WorkflowOptions options =
+                    WorkflowOptions.newBuilder()
+                            .setTaskQueue(MissionWorker.TASK_QUEUE)
+                            .setWorkflowId("MISSION-M002")
+                            .build();
 
-        MissionWorkflow workflow =
-                client.newWorkflowStub(
-                        MissionWorkflow.class,
-                        options
-                );
+            MissionWorkflow workflow =
+                    client.newWorkflowStub(
+                            MissionWorkflow.class,
+                            options
+                    );
 
-        String result = workflow.startMission("M001");
+            String result = workflow.startMission("M002");
 
-        System.out.println("Final Result: " + result);
+            System.out.println("Final Result: " + result);
+            System.out.println("Mission Status: "
+                    + workflow.getMissionStatus());
 
-        service.shutdown();
+        } finally {
+            service.shutdown();
+        }
     }
 }
