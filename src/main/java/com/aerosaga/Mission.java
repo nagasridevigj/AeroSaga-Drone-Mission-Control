@@ -32,7 +32,7 @@ public class Mission {
     public String getDeliveryLocation() {
         return deliveryLocation;
     }
-
+  
     public String getStatus() {
         return status;
     }
