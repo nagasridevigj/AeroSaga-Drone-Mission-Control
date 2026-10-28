@@ -55,7 +55,7 @@ public class MissionController {
 
     @GetMapping("/{missionId}/status")
     public ResponseEntity<Map<String, String>> getMissionStatus(
-            @PathVariable String missionId) {
+            @PathVariable("missionId") String missionId) {
 
         String workflowId = "MISSION-" + missionId;
 
