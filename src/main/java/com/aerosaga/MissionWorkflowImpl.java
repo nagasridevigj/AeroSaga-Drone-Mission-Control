@@ -1,12 +1,17 @@
-
 package com.aerosaga;
 
 import io.temporal.workflow.Workflow;
-import io.temporal.workflow.QueryMethod;
 import io.temporal.activity.ActivityOptions;
+
 import java.time.Duration;
+import java.util.Map;
 
 public class MissionWorkflowImpl implements MissionWorkflow {
+
+    private String missionId;
+    private String droneId;
+    private String pickupLocation;
+    private String deliveryLocation;
 
     private String missionStatus = "CREATED";
 
@@ -24,7 +29,28 @@ public class MissionWorkflowImpl implements MissionWorkflow {
     }
 
     @Override
-    public String startMission(String missionId) {
+    public Map<String, String> getMissionDetails() {
+
+        return Map.of(
+            "missionId", missionId,
+            "droneId", droneId,
+            "pickupLocation", pickupLocation,
+            "deliveryLocation", deliveryLocation,
+            "status", missionStatus
+        );
+    }
+
+    @Override
+    public String startMission(
+            String missionId,
+            String droneId,
+            String pickupLocation,
+            String deliveryLocation) {
+
+        this.missionId = missionId;
+        this.droneId = droneId;
+        this.pickupLocation = pickupLocation;
+        this.deliveryLocation = deliveryLocation;
 
         missionStatus = "PICKUP_IN_PROGRESS";
 

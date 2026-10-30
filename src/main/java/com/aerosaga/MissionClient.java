@@ -1,4 +1,3 @@
-
 package com.aerosaga;
 
 import io.temporal.client.WorkflowClient;
@@ -28,7 +27,12 @@ public class MissionClient {
                             options
                     );
 
-            String result = workflow.startMission("M002");
+            String result = workflow.startMission(
+                    "M002",
+                    "DRONE-01",
+                    "Chennai",
+                    "Coimbatore"
+            );
 
             System.out.println("Final Result: " + result);
             System.out.println("Mission Status: "
